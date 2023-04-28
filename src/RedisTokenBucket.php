@@ -11,19 +11,19 @@ declare(strict_types=1);
  */
 namespace Nasustop\HapiRateLimit;
 
-use Redis;
+use Hyperf\Redis\RedisProxy;
 
 class RedisTokenBucket
 {
     /**
-     * @param Redis $redis redis连接
+     * @param RedisProxy $redis redis连接
      * @param string $key 缓存key
      * @param int $capacity 令牌桶容量
      * @param int $rate 令牌桶生成令牌速率
      * @param int $interval 令牌桶生成令牌时间间隔
      */
     public function __construct(
-        protected Redis $redis,
+        protected RedisProxy $redis,
         protected string $key = 'hapi_rate_limit',
         protected int $capacity = 1000,
         protected int $rate = 1000,
