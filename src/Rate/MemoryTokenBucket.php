@@ -32,7 +32,6 @@ class MemoryTokenBucket implements TokenBucketInterface
     public function getToken(int $tokens): bool
     {
         $this->refillTokens();
-        var_dump('echo', ProcessData::$work_id, Coroutine::id(), $this->table->get('rate_limit', 'tokens'));
         if ($tokens > $this->table->get('rate_limit', 'tokens')) {
             return false;
         }
