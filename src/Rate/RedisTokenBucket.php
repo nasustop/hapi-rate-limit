@@ -9,11 +9,12 @@ declare(strict_types=1);
  * @contact  xupengfei@xupengfei.net
  * @license  https://github.com/nasustop/hapi-rate-limit/blob/master/LICENSE
  */
-namespace Nasustop\HapiRateLimit;
+namespace Nasustop\HapiRateLimit\Rate;
 
 use Hyperf\Redis\RedisProxy;
+use RuntimeException;
 
-class RedisTokenBucket
+class RedisTokenBucket implements TokenBucketInterface
 {
     /**
      * @param RedisProxy $redis redis连接
@@ -71,7 +72,7 @@ class RedisTokenBucket
             return 1
         ", [$this->key, $this->capacity, $this->rate, $this->interval], 1);
         if ($result === false) {
-            throw new \RuntimeException(sprintf('refill token error: %s', $this->redis->getLastError()));
+            throw new RuntimeException(sprintf('refill token error: %s', $this->redis->getLastError()));
         }
         return is_int($result);
     }

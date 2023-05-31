@@ -2,6 +2,7 @@
     "name": "nasustop/hapi-rate-limit",
     "type": "library",
     "license": "MIT",
+    "version": "1.0.2",
     "keywords": [
         "php",
         "hyperf"
@@ -19,9 +20,9 @@
     },
     "require": {
         "php": ">=8.0",
-        "hyperf/redis": "~3.0.0",
+        "hyperf/framework": "~3.0.0",
         "hyperf/http-server": "~3.0.0",
-        "ext-redis": "*"
+        "hyperf/redis": "~3.0.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",
@@ -31,7 +32,8 @@
         "swoole/ide-helper": "^4.5"
     },
     "suggest": {
-        "swow/swow": "Required to create swow components."
+        "swow/swow": "Required to create swow components.",
+        "ext-redis": "Required to use Redis Client."
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
