@@ -11,7 +11,6 @@ declare(strict_types=1);
  */
 namespace Nasustop\HapiRateLimit\Rate;
 
-use Hyperf\Coroutine\Coroutine;
 use Nasustop\HapiRateLimit\ProcessData;
 use Swoole\Table;
 
