@@ -25,7 +25,8 @@ class MemoryRateLimitMiddleware implements MiddlewareInterface
     {
         $memoryRate = new MemoryTokenBucket(1000, 1000, 1);
         if (! $memoryRate->getToken(1)) {
-            $response = ApplicationContext::getContainer()->get(ResponseInterface::class);
+            /* @var $response ResponseInterface */
+            $response = make(ResponseInterface::class);
             return $response->json([
                 'code' => 429,
                 'msg' => 'To Many Requests.',

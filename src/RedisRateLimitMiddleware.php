@@ -24,15 +24,18 @@ class RedisRateLimitMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): PsrResponseInterface
     {
+        /* @var $redisFactory RedisFactory */
+        $redisFactory = make(RedisFactory::class);
         $redisRate = new RedisTokenBucket(
-            redis: ApplicationContext::getContainer()->get(RedisFactory::class)->get('default'),
+            redis: $redisFactory->get('default'),
             key: 'hapi_rate_limit',
             capacity: 1000,
             rate: 1000,
             interval: 1
         );
         if (! $redisRate->getToken(1)) {
-            $response = ApplicationContext::getContainer()->get(ResponseInterface::class);
+            /* @var $response ResponseInterface */
+            $response = make(ResponseInterface::class);
             return $response->json([
                 'code' => 429,
                 'msg' => 'To Many Requests.',
